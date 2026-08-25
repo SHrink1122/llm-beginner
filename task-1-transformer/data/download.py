@@ -2,9 +2,13 @@
 
 依赖：pip install datasets pyarrow
 
-默认从 Hugging Face 下载。如果国内访问 HF 不稳定：
-  - 方案一（推荐）：设置环境变量 HF_ENDPOINT=https://hf-mirror.com
-  - 方案二：用 ModelScope（见脚本末尾提示）
+注意：这里用的是 lansinuote/ChnSentiCorp，它的数据文件直接托管在
+Hugging Face 上（parquet 格式）。官方 seamew/ChnSentiCorp 的数据文件
+放在 Google Drive，国内无法访问，会导致 FileNotFoundError。
+
+如果国内访问 HF 不稳定，设置环境变量后重试：
+  PowerShell: $env:HF_ENDPOINT = "https://hf-mirror.com"
+  Bash:       export HF_ENDPOINT=https://hf-mirror.com
 """
 import os
 import sys
@@ -15,15 +19,15 @@ DATA_DIR = Path(__file__).parent
 
 def main():
     if "HF_ENDPOINT" not in os.environ:
-        print("[提示] 如下载缓慢，可先 export HF_ENDPOINT=https://hf-mirror.com 再重试\n")
+        print("[提示] 如下载缓慢，可先设 $env:HF_ENDPOINT = 'https://hf-mirror.com' 再重试\n")
 
     try:
         from datasets import load_dataset
     except ImportError:
         sys.exit("[错误] 缺少依赖：pip install datasets pyarrow")
 
-    print("正在下载 seamew/ChnSentiCorp ...")
-    ds = load_dataset("seamew/ChnSentiCorp", cache_dir=str(DATA_DIR / "cache"))
+    print("正在下载 lansinuote/ChnSentiCorp ...")
+    ds = load_dataset("lansinuote/ChnSentiCorp", cache_dir=str(DATA_DIR / "cache"))
 
     for split in ds.keys():
         out = DATA_DIR / f"{split}.parquet"
