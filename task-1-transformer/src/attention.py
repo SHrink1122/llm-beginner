@@ -5,7 +5,7 @@ import torch.nn.functional as F
 import math
 
 
-def scaled_dot_product_attention(Q, K, V, mask=None):
+def scaled_dot_product_attention(Q, K, V, mask=None, return_weights=False):
     #q.shape=(batch, num_heads, seq_len, d_k)
     d_k = Q.shape[-1]
     #计算注意力分数
@@ -15,6 +15,9 @@ def scaled_dot_product_attention(Q, K, V, mask=None):
         scores = scores.masked_fill(mask, -1e9) 
 
     attn_weights = F.softmax(scores, dim=-1)
+
+    if return_weights:
+        return attn_weights @ V, attn_weights  
     return attn_weights @ V
 
 class MultiHeadAttention(nn.Module):
@@ -46,8 +49,8 @@ class MultiHeadAttention(nn.Module):
         V = self.split_heads(self.W_v(x))
 
         # 注意力分数计算
-        attn_output = scaled_dot_product_attention(Q, K, V, mask)
-
+        attn_output, attn_weights = scaled_dot_product_attention(Q, K, V, mask, return_weights=True)
+        self.attn_weights = attn_weights
         output = self.W_o(self.concat_heads(attn_output))
 
         return output
