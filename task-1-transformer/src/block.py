@@ -1,10 +1,14 @@
 # block.py
+import sys
+from pathlib import Path
+
 import torch.nn as nn
 import torch.nn.functional as F
-try:
-    from attention import MultiHeadAttention
-except ImportError:
-    from src.attention import MultiHeadAttention
+
+ROOT = Path(__file__).resolve().parents[1]   
+sys.path.insert(0, str(ROOT))                
+
+from src.attention import MultiHeadAttention   
 
 
 class FeedForward(nn.Module):

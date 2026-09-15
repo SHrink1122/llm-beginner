@@ -1,8 +1,9 @@
 # attenion.py
+import math
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import math
 
 
 def scaled_dot_product_attention(Q, K, V, mask=None, return_weights=False):

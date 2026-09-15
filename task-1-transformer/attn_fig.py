@@ -1,8 +1,14 @@
 # attn_fig.py
-import torch
-import matplotlib.pyplot as plt
+import sys
 from pathlib import Path
-from src.model import load_for_eval
+
+import matplotlib.pyplot as plt
+import torch
+
+ROOT = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT))          # 让 `python attn_fig.py` 在任意目录下都能 import src.*
+
+from src.model import load_for_eval    # noqa: E402
 
 # 中文字体：默认字体不含中文字形，坐标轴中文会显示为方块乱码，这里显式指定系统里的中文字体
 plt.rcParams["font.sans-serif"] = ["Microsoft YaHei", "SimHei", "SimSun", "Noto Sans SC"]

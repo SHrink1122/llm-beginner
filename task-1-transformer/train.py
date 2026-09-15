@@ -1,13 +1,18 @@
 # train.py
-import torch
-import pandas as pd
-import torch.nn as nn
-from pathlib import Path
-from torch.utils.data import DataLoader
 import math
+import sys
+from pathlib import Path
 
-from src.tokenizer import TextDataset, build_tokenizer, collate_fn
-from src.model import TransformerClassifier
+import pandas as pd
+import torch
+import torch.nn as nn
+from torch.utils.data import DataLoader
+
+ROOT = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT))          
+
+from src.model import TransformerClassifier                        
+from src.tokenizer import TextDataset, build_tokenizer, collate_fn  
 
 
 # 超参数
@@ -25,7 +30,6 @@ EPOCHS = 10
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
-ROOT = Path(__file__).resolve().parent
 CKPT_DIR = ROOT / "ckpt"
 CKPT_PATH = CKPT_DIR / "best.pt"
 

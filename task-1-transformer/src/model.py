@@ -1,13 +1,16 @@
-# model.py 
+# model.py
 import math
+import sys
+from pathlib import Path
+
 import torch
 import torch.nn as nn
-try:
-    from block import TransformerBlock
-    from tokenizer import CharTokenizer
-except ImportError:
-    from src.block import TransformerBlock
-    from src.tokenizer import CharTokenizer
+
+ROOT = Path(__file__).resolve().parents[1]  
+sys.path.insert(0, str(ROOT))                
+
+from src.block import TransformerBlock     
+from src.tokenizer import CharTokenizer   
 
 
 PAD_ID, UNK_ID, CLS_ID = 0, 1, 2
