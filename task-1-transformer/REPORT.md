@@ -1,3 +1,5 @@
+# Task1-熟悉 Transformer
+
 **Fork 仓库**：https://github.com/SHrink1122/llm-beginner
 
 **DoD Checklist**
@@ -43,4 +45,4 @@ char-level tokenizer（vocab **4253** = 4250 个字符 + `<pad>/<unk>/<cls>` 3 �
 
 ## 小结
 
-完成全部核心任务及加分项，dev 准确率 0.9083。实现手写注意力与因果掩码，误差达标。调参通过增大模型与长度、加入 warmup 提升效果。注意力热图显示分布稀疏、随长度加剧，高层权重递增，但字符级分词下难以直接验证语义对齐。
+完成全部核心任务及一个加分项，dev 准确率 0.9083。实现手写注意力与因果掩码，误差达标。调参通过增大模型与长度、加入 warmup 提升效果。
