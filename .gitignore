@@ -13,3 +13,8 @@ venv/
 
 # Claude Code 工具产物（agent worktree、session 等，勿入公开仓库）
 .claude/
+
+.vscode/
+
+# _swanlog_reader.py 导出的实验记录（约 11MB，随时可由脚本重生成）
+swanlog_export/

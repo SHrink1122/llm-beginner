@@ -1,6 +1,18 @@
 data/cache/
 data/*.parquet
 data/*.jsonl
+
+# HF 下载的原始数据集：体积大，且按 data/download.py 打印的命令可随时重新拉取。
+# data/moss-sft/          moss-003-sft-no-tools.jsonl.zip，2.6GB（解压后 11GB）
+# data/moss-sft-plugin/   with-tools 分片，任务五用
+# data/dpo-enzh20k/       DPO-En-Zh-20k，80MB
+data/moss-sft/
+data/moss-sft-plugin/
+data/dpo-enzh20k/
+
+# 下载日志（UTF-16，含失败重试记录，无需入库）
+dl.log
+
 ckpt/
 models/
 src/__pycache__/
@@ -8,3 +20,7 @@ eval/__pycache__/
 eval/result.json
 *.pyc
 .venv/
+
+# 画图脚本：依赖本地 swanlog 与 llm-beginner 环境，不入库；
+# 生成的 figures/sft_dpo_curves.png 保留入库（REPORT.md 直接引用）
+figures/plot_curves.py

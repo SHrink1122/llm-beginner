@@ -6,6 +6,7 @@ huggingface_hub>=0.20
 numpy>=1.23
 pandas>=2.0
 tqdm>=4.65
+swanlab>=0.10
 # 以下两个仅作为对照/可选，不强制：
 # peft>=0.10
 # trl>=0.8
